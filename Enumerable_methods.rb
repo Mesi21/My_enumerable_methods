@@ -7,7 +7,7 @@ module Enumerable
             k++
         end
         self
-    end #
+    end 
   
     def my_each_with_index
       l=self.length-1
@@ -15,7 +15,7 @@ module Enumerable
         yield(self[k] , k)
       end
       self
-    end #
+    end 
   
     def my_select
       arr = []
@@ -25,7 +25,7 @@ module Enumerable
         end
       end
       arr
-    end #
+    end 
   
     def my_all?
         k = 0
@@ -36,7 +36,7 @@ module Enumerable
           k++
         end
     true
-    end #
+    end 
   
     def my_any?
         k = 0
@@ -47,7 +47,7 @@ module Enumerable
           k++
         end
     false
-    end #
+    end 
   
     def my_none?
         k = 0
@@ -74,15 +74,21 @@ module Enumerable
           k++
         end
         c
-    end #
+    end 
   
-    def my_map(&block)
-      ar = []
-      self.my_each do |k|
-        ar.push(block.call(i))
+    def my_map(proc = nil)
+      unless proc
+        self.my_each_with_index do |k, i|
+          self[i] = yield(k)
+        end
+      else
+        self.my_each_with_index do |k, i|
+          self[i] = proc.call(k)
+          self[i] = yield(self[i]) if block_given?
+        end
       end
-      ar
-    end #
+      self
+    end 
   
     def my_inject(final=nil)
       final = self[0] if final.nil?
@@ -90,6 +96,6 @@ module Enumerable
         final = yield(final,k)
       end
       final
-    end  #
+    end  
   
   end
