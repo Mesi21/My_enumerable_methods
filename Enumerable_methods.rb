@@ -97,9 +97,8 @@ module Enumerable
       end
       final
     end  
+  end
 
-    def multiply_els ar
-      ar.my_inject { |sum, k| sum * k }
-    end
-  
+  def multiply_els(ar)
+    ar.my_inject() { |sum, k| sum * k }
   end
