@@ -81,17 +81,17 @@ module Enumerable
     new_array
   end 
 
-  def my_inject(final=nil)
-    final = self[0] if final.nil?
+  def my_inject(v=nil)
+    v=0 if v.nil? 
     self.my_each do |k|
-      final = yield(final,k)
+      v = yield(v, k)
     end
-    final
-  end  
+    v
+  end
 end
 
 def multiply_els(ar)
-  ar.my_inject() { |sum, k| sum * k }
+  ar.my_inject(1) { |sum, k| sum * k }
 end
 
 #[1,2,3].my_each{|i| puts i}
@@ -102,4 +102,4 @@ end
 #puts [1,2,3].my_none?{|i|  i>2}
 #puts [1,2,3,4].my_count{|i| i>=2}
 #puts [1,2,3,4].my_map{|i| i>2}
-puts multiply_els([1,2,3,4])
+puts multiply_els([5,2,3,4])
